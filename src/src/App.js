@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import Header from './components/Header'
+import Beverages from './components/Beverages'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = () => {
+    // State is immutable
+    const [drinks, setDrinks] = useState([
+        {
+            id: 1,
+            text: 'Margarita',
+            day: 'Mar 22',
+            showInfo: false
+        },
+        {
+            id: 2,
+            text: 'Beer',
+            day: 'Mar 23',
+            showInfo: false
+        },
+        {
+            id: 3,
+            text: 'Vodka',
+            day: 'Mar 21',
+            showInfo: false
+        },
+        
+    ])
+    // Delete a drink
+    const deleteDrink = (id) => {
+        setDrinks(drinks.filter( (drink) => drink.id !== id))
+        // Add something to play Minecraft drinking sound
+    }
+    // Toggle Info
+    const toggleInfo = (id) => {
+        setDrinks(drinks.map(
+            (drink) => drink.id === id ? {...drink, showInfo: !drink.showInfo} : drink
+        ))
+    }
+    return (
+        <div className='container'>
+        <Header/>
+        { drinks.length > 0 ?
+            (<Beverages drinks={drinks} 
+                onDelete={deleteDrink}
+                onToggle={toggleInfo}
+            />) : 
+            (<h3>No drinks left</h3>)
+        }
+        
+        </div>
   );
 }
+
+
 
 export default App;
