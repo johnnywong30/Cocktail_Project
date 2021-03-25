@@ -3,7 +3,9 @@ MakeItHappen Assessment using React and Redux
 
 ## To Run
 ```bash
-$ <tbd>
+$ cd server
+$ npm install
+$ npm start
 ```
 
 ## To Do
