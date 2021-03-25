@@ -1,6 +1,11 @@
 # Cocktail_Project
 MakeItHappen Assessment using React and Redux
 
+## To Run
+```bash
+$ <tbd>
+```
+
 ## To Do
 - [x] Create React App
 - [ ] Use Axios to fetch Cocktail data

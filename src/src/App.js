@@ -36,6 +36,7 @@ const App = () => {
             (drink) => drink.id === id ? {...drink, showInfo: !drink.showInfo} : drink
         ))
     }
+
     return (
         <div className='container'>
         <Header/>
