@@ -8,6 +8,16 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  /* Use an image to be background and covers all empty space */
+  background-image: url('./images/bar.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.root{
+    padding-bottom: 60px;
 }
 
 .container {
@@ -15,16 +25,25 @@ body {
   margin: 50px auto;
   overflow: auto;
   min-height: 100px;
-  border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
+  color: rgba(7, 208, 253, 0.733);
+  
+}
+
+.ad {
+  background: #fffffffa;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
+  text-align: center;
   align-items: center;
-  margin-bottom: 20px;
+  color: rgba(7, 208, 253, 0.733);
 }
 
 .btn {
@@ -55,14 +74,11 @@ body {
 }
 
 .drink {
-  background: #f4f4f4;
-  margin: 5px;
+  background: #fffffffa;
+  margin: 10px;
   padding: 10px 20px;
   cursor: pointer;
-}
-
-.drink.reminder {
-  border-left: 5px solid green;
+  border-radius: 10px;
 }
 
 .drink h3 {
@@ -71,42 +87,19 @@ body {
   justify-content: space-between;
 }
 
-.add-form {
-  margin-bottom: 40px;
-}
-
-.form-control {
-  margin: 20px 0;
-}
-
-.form-control label {
-  display: block;
-}
-
-.form-control input {
-  width: 100%;
-  height: 40px;
-  margin: 5px;
-  padding: 3px 7px;
-  font-size: 17px;
-}
-
-.form-control-check {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.form-control-check label {
-  flex: 1;
-}
-
-.form-control-check input {
-  flex: 2;
-  height: 20px;
-}
-
-footer {
-  margin-top: 30px;
+/* Keep footer at bottom of page at all times */
+.footer {
+  background-color: #b3b3ffce;
+  height:24px; 
+  width: 100%; 
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  position: fixed;
+  bottom: 0pt;
+  left: 0pt;
   text-align: center;
 }
+
+

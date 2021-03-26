@@ -2,17 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import axios from 'axios';
-import random from './routes/random.js'; 
-const API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 
-export class Drink {
-    constructor(drinkData) {
-        this.id = drinkData.idDrink
-        this.name = drinkData.strDrink
-        this.category = drinkData.strCategory
-        this.alcoholic = drinkData.strAlcoholic
-    }
-}
+import Drink from './models/drink.js';
+const API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+const API_URL_2 = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+const DRINK_TYPES = ['wine', 'vodka', 'beer', 'margarita', 'gin', 'rum'];
+
 
 const app = express();
 // client and server have to be on different ports!!!
@@ -32,23 +27,23 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-// get random Drink
+// send random Drink to caller
 app.use('/random', (req, res) => {
     axios.get(API_URL)
-        // .then(response => res.json({drink: new Drink(response.data)}))
-        .then(response => res.json(response.data))
+        .then(response => res.json({drink: new Drink(response.data.drinks[0])}))
         .catch(error => console.log(error))
 });
 
-app.use('/poo', (req, res) => {
-    console.log("reached random")
-    console.log("finished fetch")
-    res.send('hello')
-});
+// send random 5 Drinks to caller
+app.use('/surprise', (req, res) => {
+    let link = API_URL_2 + DRINK_TYPES[Math.floor(Math.random() * DRINK_TYPES.length)]
+    axios.get(link)
+        .then(response => res.json({drinks: response.data.drinks.map((drink) => new Drink(drink))}))
+        .catch(error => console.log(error))
+})
 
 // send React client as default
 app.get('*', (req, res) => {
-    console.log("boo")
     req.url = '/';
     res.sendFile(path.join(__dirname, './client/public', 'index.html'));
 })
