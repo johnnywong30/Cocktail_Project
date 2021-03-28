@@ -11,9 +11,10 @@ $ npm run dev
 ## To Do
 - [x] Create React App
 - [x] Use Axios to fetch Cocktail data
-- [ ] Search query to look for drinks
 - [x] Create a "Model" representation of the data
 - [x] Add Minecraft drinking sound
+- [ ] Write documentation
+- [ ] Test on fresh clone of repo
 ## Bonus To Do
 - [ ] Store the retrieved data inside a Redux Store and pass to the front end to be displayed
 - [x] Styling

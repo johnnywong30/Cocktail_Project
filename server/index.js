@@ -6,6 +6,8 @@ import axios from 'axios';
 import Drink from './models/drink.js';
 const API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 const API_URL_2 = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+
+// simulates query
 const DRINK_TYPES = ['wine', 'vodka', 'beer', 'margarita', 'gin', 'rum'];
 
 
@@ -34,11 +36,20 @@ app.use('/random', (req, res) => {
         .catch(error => console.log(error))
 });
 
-// send random 5 Drinks to caller
+// shuffles a given array using Durstenfeld shuffle and returns it
+const shuffle = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// send random Drinks to caller
 app.use('/surprise', (req, res) => {
     let link = API_URL_2 + DRINK_TYPES[Math.floor(Math.random() * DRINK_TYPES.length)]
     axios.get(link)
-        .then(response => res.json({drinks: response.data.drinks.map((drink) => new Drink(drink))}))
+        .then(response => res.json({drinks: shuffle(response.data.drinks).map((drink) => new Drink(drink))}))
         .catch(error => console.log(error))
 })
 

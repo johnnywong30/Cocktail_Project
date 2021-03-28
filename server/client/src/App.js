@@ -24,7 +24,6 @@ const App = () => {
     const deleteDrink = (id) => {
         setDrinks(drinks.filter( (drink) => drink.id !== id))
         drinkSound()
-        // Add something to play Minecraft drinking sound
     }
     // Toggle Info
     const toggleInfo = (id) => {
@@ -36,21 +35,26 @@ const App = () => {
     // Add a drink
     const addDrink = (data) => {
         setDrinks([...drinks, data.drink]);
-
+    }
+    // Add an array of drinks
+    const addDrinks = (data) => {
+        setDrinks([...drinks, ...data])
     }
 
     // generate random drink on load
-    useEffect(() => {
-        // retrieve a Drink object from ExpressJS server
-        axios.get('http://localhost:4000/random')
-             .then(res => addDrink(res.data)) 
-        // Side effect: every time the server refreshes, there is a new drink added
-    }, [])
+    // useEffect(() => {
+    //     // retrieve a Drink object from ExpressJS server
+    //     axios.get('http://localhost:4000/random')
+    //          .then(res => addDrink(res.data)) 
+    //     // Side effect: every time the server refreshes, there is a new drink added
+    // }, [])
 
     return (
         <>
             <div className='container'>
-                <Header onClick={addDrink}/>
+                <Header onClick={addDrink}
+                        onSurprise={addDrinks}
+                />
                 { drinks.length > 0 ?
                     (<Beverages drinks={drinks} 
                     onDelete={deleteDrink}

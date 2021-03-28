@@ -24,7 +24,7 @@ const Drink = ({drink, onDelete, onToggle}) => {
 
 // CSS in JS
 const drinkStyle = {
-    color:'steelblue', 
+    color:'rgba(246, 77, 47, 0.733)', 
     cursor:'pointer',
 }
 

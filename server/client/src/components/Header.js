@@ -5,7 +5,7 @@ import Button from './Button'
 
 
 // Order Button will add a drink to the current list
-const Header = ( { title, onClick } ) => {
+const Header = ( { title, onClick, onSurprise} ) => {
 
     // State is immutable
     const [count, setCount] = useState(0)
@@ -15,7 +15,7 @@ const Header = ( { title, onClick } ) => {
     }
 
     const reset = () => {
-        setCount(0)
+        setCount(count - 3)
     }
     
     return (
@@ -31,7 +31,7 @@ const Header = ( { title, onClick } ) => {
                         console.log(count)
                     }}
             />
-            { count < 5 ?
+            { count < 3 ?
                 <></>
                 :
                 <Button text='Surprise'
@@ -40,7 +40,8 @@ const Header = ( { title, onClick } ) => {
                             const response = await axios.get('http://localhost:4000/surprise');
                             const data = await response.data;
                             console.log(data.drinks) 
-                            // mess around with adding each drink to the orders  
+                            onSurprise(data.drinks)
+                            // use onSurprise
                             // data.drinks.forEach()
                             reset()
                         }}
@@ -57,6 +58,7 @@ Header.defaultProps = {
 Header.propTypes = {
     title: PropTypes.string.isRequired,
     onClick: PropTypes.func,
+    onSurprise: PropTypes.func,
 }
 
 export default Header
