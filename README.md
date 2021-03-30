@@ -4,7 +4,7 @@ MakeItHappen Assessment using React, Redux, and Express
 By Johnny Wong
 
 ## Overview
-This project aims to explore the basics of React, Redux, and Express to create a small application. React provides a scalable front-end design to display each component that makes up the application. Redux helps make managing the state of components through the use of actions and reducers. The Express server retrieves data from the [Cocktail DB API](https://www.thecocktaildb.com/api.php) and sends it to the client to be displayed. 
+This project aims to explore the basics of React, Redux, and Express to create a small application. React provides a scalable front-end design to display each component that make up the application. Redux helps manage the state of components through the use of actions, reducers, and the store. This project used Redux-Toolkit. The Express server retrieves data from the [Cocktail DB API](https://www.thecocktaildb.com/api.php) and sends it to the client to be displayed. 
 
 ## To Run
 ```bash
