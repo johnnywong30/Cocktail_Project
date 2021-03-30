@@ -1,13 +1,14 @@
+import { useSelector } from 'react-redux';
+
 import Drink from './Drink'
 
-const Beverages = ({drinks, onDelete, onToggle}) => {
+const Beverages = () => {
+    const { drinks } = useSelector(state => state.drinks)
     return (
         <>
             {drinks.map( (drink) => (
                 <Drink key={drink.id} 
                        drink={drink} 
-                       onDelete={onDelete}
-                       onToggle={onToggle}
                 />
             ))}
         </>

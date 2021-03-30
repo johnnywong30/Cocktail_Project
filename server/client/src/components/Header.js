@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addDrink, addDrinks } from '../redux/drinks'
 import axios from 'axios'
 import PropTypes from 'prop-types'
+
 import Button from './Button'
 
 
 // Order Button will add a drink to the current list
 const Header = ( { title, onClick, onSurprise} ) => {
+    const dispatch = useDispatch()
 
     // State is immutable
     const [count, setCount] = useState(0)
@@ -26,9 +30,10 @@ const Header = ( { title, onClick, onSurprise} ) => {
                         // waiting for the response before incrementing count
                         const response = await axios.get('http://localhost:4000/random');
                         const data = await response.data;
-                        onClick(data);            
-                        increment()
-                        console.log(count)
+                        // dispatch is synchronous, need to learn redux 
+                        // middleware to deal with memory leaks
+                        dispatch(addDrink(data.drink));          
+                        increment();                       
                     }}
             />
             { count < 3 ?
@@ -39,11 +44,10 @@ const Header = ( { title, onClick, onSurprise} ) => {
                         onClick = { async () => {
                             const response = await axios.get('http://localhost:4000/surprise');
                             const data = await response.data;
-                            console.log(data.drinks) 
-                            onSurprise(data.drinks)
-                            // use onSurprise
-                            // data.drinks.forEach()
-                            reset()
+                            // dispatch is synchronous, need to learn redux 
+                            // middleware to deal with memory leaks
+                            dispatch(addDrinks(data.drinks));
+                            reset();
                         }}
                 />
             }

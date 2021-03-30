@@ -1,12 +1,30 @@
-import { BiDrink } from 'react-icons/bi' 
+import { toggleInfo, deleteDrink } from '../redux/drinks'; 
+import { useDispatch } from 'react-redux';
 
-const Drink = ({drink, onDelete, onToggle}) => {
+import useSound from 'use-sound';
+// Sourced from: https://youtu.be/XxoOkmvMjmo
+import drinkSfx from '../sounds/drink.mp3';
+
+ 
+import Icon from './Icon'
+
+const Drink = ({drink}) => {
+    
+    const [drinkSound] = useSound( 
+        drinkSfx,
+        {volume: 0.25}
+    )
+
+    const onClick = () => {
+        dispatch(deleteDrink(drink.id))
+        drinkSound()
+    }
+
+    const dispatch = useDispatch()
     return (
-        <div className='drink' onDoubleClick={() => onToggle(drink.id)}>
+        <div className='drink' onDoubleClick={() => dispatch(toggleInfo(drink.id))}>
             <h3>{drink.name} 
-                <BiDrink style={drinkStyle}
-                         onClick={() => onDelete(drink.id)}
-                /> 
+                <Icon onClick={ () => onClick()}/>   
             </h3>
             {   drink.showInfo ? 
                 <>
@@ -20,12 +38,6 @@ const Drink = ({drink, onDelete, onToggle}) => {
             }
         </div>
     )
-}
-
-// CSS in JS
-const drinkStyle = {
-    color:'rgba(246, 77, 47, 0.733)', 
-    cursor:'pointer',
 }
 
 export default Drink
